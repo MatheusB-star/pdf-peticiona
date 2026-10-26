@@ -1,0 +1,567 @@
+/* Componentes reutilizáveis: botões, selos, cabeçalho, cartões. */
+
+/* ---------- Botões ---------- */
+.btn {
+  --btn-bg: var(--surface);
+  --btn-fg: var(--text);
+  --btn-border: var(--line-strong);
+  --btn-bg-hover: var(--surface-sunken);
+  --btn-bg-active: #e9eaee;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-height: 44px;
+  padding: 0 var(--s-5);
+  border: 1px solid var(--btn-border);
+  border-radius: var(--r-pill);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  text-decoration: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out),
+    transform var(--dur-1) var(--ease-out),
+    color var(--dur-2) var(--ease-out);
+}
+
+.btn:hover {
+  background: var(--btn-bg-hover);
+  text-decoration: none;
+}
+
+.btn:active:not(:disabled):not([aria-disabled="true"]) {
+  background: var(--btn-bg-active);
+  transform: scale(0.97);
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--accent-ring);
+  border-radius: var(--r-pill);
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.45;
+  transform: none;
+}
+
+.btn--primary {
+  --btn-bg: var(--accent);
+  --btn-fg: var(--text-inverse);
+  --btn-border: transparent;
+  --btn-bg-hover: var(--accent-hover);
+  --btn-bg-active: var(--accent-active);
+  box-shadow: 0 1px 2px rgba(26, 24, 86, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.btn--dark {
+  --btn-bg: var(--graphite);
+  --btn-fg: var(--text-inverse);
+  --btn-border: transparent;
+  --btn-bg-hover: var(--graphite-2);
+  --btn-bg-active: #111216;
+}
+
+.btn--ghost {
+  --btn-bg: transparent;
+  --btn-border: transparent;
+  --btn-bg-hover: rgba(17, 20, 28, 0.05);
+  --btn-bg-active: rgba(17, 20, 28, 0.09);
+}
+
+.btn--lg {
+  min-height: 52px;
+  padding: 0 var(--s-6);
+  font-size: var(--fs-md);
+}
+
+.btn--sm {
+  min-height: 36px;
+  padding: 0 var(--s-4);
+  font-size: var(--fs-xs);
+}
+
+.btn--icon {
+  width: 40px;
+  min-height: 40px;
+  padding: 0;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* Estado de carregamento: mantém a largura e troca o conteúdo pelo indicador. */
+.btn .btn__spinner {
+  display: none;
+}
+
+.btn.is-loading {
+  cursor: progress;
+  pointer-events: none;
+}
+
+.btn.is-loading .btn__label,
+.btn.is-loading > .icon {
+  opacity: 0;
+}
+
+.btn.is-loading .btn__spinner {
+  display: block;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- Selos ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  background: var(--surface-sunken);
+  color: var(--text-2);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.badge--accent {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.badge--success {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.badge--danger {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.badge--warning {
+  background: var(--warning-soft);
+  color: var(--warning);
+}
+
+.badge--example {
+  background: transparent;
+  border: 1px dashed var(--line-strong);
+  color: var(--text-3);
+  font-weight: 500;
+}
+
+/* ---------- Cabeçalho ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-h);
+  background: rgba(238, 242, 248, 0.74);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  border-bottom: 1px solid transparent;
+  transition:
+    border-color var(--dur-3) var(--ease-out),
+    background-color var(--dur-3) var(--ease-out);
+}
+
+.site-header.is-scrolled {
+  border-bottom-color: var(--line);
+  background: rgba(238, 242, 248, 0.88);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-5);
+  height: 100%;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.125rem;
+  letter-spacing: -0.02em;
+}
+
+.brand:hover {
+  text-decoration: none;
+}
+
+/* Logotipo em texto, inspirado na marca SIAP: índigo, inclinado, com o ponto do "i" em quadrado laranja.
+   Substitua por arquivo oficial (SVG) quando disponível. */
+.wordmark {
+  display: inline-block;
+  color: var(--brand-indigo);
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  transform: skewX(-4deg);
+}
+
+.wordmark__i {
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+}
+
+.wordmark__i::after {
+  content: "";
+  position: absolute;
+  left: 68%;
+  bottom: calc(1ex + 0.1em);
+  width: 0.24em;
+  height: 0.2em;
+  background: var(--brand-orange);
+  transform: translateX(-50%) skewX(-10deg);
+}
+
+.brand__product {
+  padding-left: 10px;
+  border-left: 1px solid var(--line-strong);
+  color: var(--text-2);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 420px) {
+  .brand__product {
+    display: none;
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+}
+
+.nav__link {
+  padding: 8px 12px;
+  border-radius: var(--r-pill);
+  color: var(--text-2);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  transition:
+    color var(--dur-2) var(--ease-out),
+    background-color var(--dur-2) var(--ease-out);
+}
+
+.nav__link:hover {
+  color: var(--text);
+  background: rgba(17, 20, 28, 0.05);
+  text-decoration: none;
+}
+
+.nav__link[aria-current="true"] {
+  color: var(--text);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.menu-toggle__bars {
+  position: relative;
+  width: 18px;
+  height: 12px;
+}
+
+.menu-toggle__bars span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1.6px;
+  border-radius: 2px;
+  background: currentColor;
+  transition:
+    transform var(--dur-3) var(--ease-out),
+    top var(--dur-3) var(--ease-out),
+    opacity var(--dur-2) var(--ease-out);
+}
+
+.menu-toggle__bars span:nth-child(1) {
+  top: 2px;
+}
+
+.menu-toggle__bars span:nth-child(2) {
+  top: 8.4px;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle__bars span:nth-child(1) {
+  top: 5.2px;
+  transform: rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle__bars span:nth-child(2) {
+  top: 5.2px;
+  transform: rotate(-45deg);
+}
+
+/* Menu mobile: painel que desliza com opacidade, sem cortes bruscos. */
+.mobile-menu {
+  position: fixed;
+  inset: var(--header-h) 0 auto 0;
+  z-index: 99;
+  padding: var(--s-3) var(--gutter) var(--s-6);
+  background: rgba(238, 242, 248, 0.97);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  border-bottom: 1px solid var(--line);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transform: translateY(-8px);
+  visibility: hidden;
+  transition:
+    opacity var(--dur-3) var(--ease-out),
+    transform var(--dur-3) var(--ease-out),
+    visibility 0s linear var(--dur-3);
+}
+
+.mobile-menu.is-open {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  transition:
+    opacity var(--dur-3) var(--ease-out),
+    transform var(--dur-3) var(--ease-out),
+    visibility 0s;
+}
+
+.mobile-menu__list {
+  list-style: none;
+  display: grid;
+  gap: 2px;
+}
+
+.mobile-menu__link {
+  display: block;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.mobile-menu__link:hover {
+  text-decoration: none;
+  color: var(--accent);
+}
+
+.mobile-menu .btn {
+  margin-top: var(--s-5);
+}
+
+.mobile-menu.is-open .mobile-menu__list li {
+  animation: menu-item-in var(--dur-4) var(--ease-out) both;
+}
+
+.mobile-menu.is-open .mobile-menu__list li:nth-child(2) {
+  animation-delay: 30ms;
+}
+.mobile-menu.is-open .mobile-menu__list li:nth-child(3) {
+  animation-delay: 60ms;
+}
+.mobile-menu.is-open .mobile-menu__list li:nth-child(4) {
+  animation-delay: 90ms;
+}
+
+@keyframes menu-item-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+@media (max-width: 880px) {
+  .nav,
+  .header-actions .btn--header-cta {
+    display: none;
+  }
+  .menu-toggle {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 881px) {
+  .mobile-menu {
+    display: none;
+  }
+}
+
+/* ---------- Cabeçalho de seção ---------- */
+.section {
+  padding-block: clamp(4rem, 3rem + 5vw, 8rem);
+}
+
+.section--alt {
+  background: var(--bg-alt);
+}
+
+.section-head {
+  max-width: 720px;
+  margin-bottom: clamp(2.5rem, 2rem + 2vw, 4rem);
+}
+
+.section-head--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--s-3);
+  color: var(--accent);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+/* Marcador laranja: o mesmo quadrado do ponto do "i" no logotipo. */
+.eyebrow::before {
+  content: "";
+  flex: none;
+  width: 8px;
+  height: 8px;
+  background: var(--brand-orange);
+  transform: skewX(-10deg);
+}
+
+.section-title {
+  font-size: var(--fs-2xl);
+}
+
+.section-lead {
+  margin-top: var(--s-4);
+  color: var(--text-3);
+  font-size: var(--fs-lg);
+  line-height: 1.5;
+}
+
+/* ---------- Cartões ---------- */
+.card {
+  position: relative;
+  padding: var(--s-6);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  background: var(--surface);
+  box-shadow: var(--shadow-xs);
+}
+
+.icon-tile {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.icon-tile--neutral {
+  background: var(--surface-sunken);
+  color: var(--graphite);
+}
+
+/* ---------- Barra de progresso ---------- */
+.progress {
+  position: relative;
+  height: 6px;
+  border-radius: var(--r-pill);
+  background: var(--surface-sunken);
+  overflow: hidden;
+}
+
+.progress__bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transform-origin: left center;
+  transform: scaleX(var(--progress, 0));
+  transition: transform var(--dur-3) var(--ease-out);
+}
+
+/* Indeterminado: usado quando o servidor não informa progresso. Não simula porcentagem. */
+.progress--indeterminate .progress__bar {
+  width: 35%;
+  transform: none;
+  animation: indeterminate 1.4s var(--ease-in-out) infinite;
+}
+
+@keyframes indeterminate {
+  from {
+    left: -35%;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress--indeterminate .progress__bar {
+    width: 100%;
+    left: 0;
+    opacity: 0.45;
+    animation: none !important;
+  }
+}
+
+.progress--success .progress__bar {
+  background: var(--success);
+}
+
+.progress--danger .progress__bar {
+  background: var(--danger);
+}

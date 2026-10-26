@@ -1,0 +1,60 @@
+/* Páginas de texto (termos, privacidade). */
+.legal {
+  max-width: 720px;
+  padding-block: var(--s-8) var(--s-9);
+}
+
+.legal h1 {
+  font-size: var(--fs-2xl);
+}
+
+.legal h2 {
+  margin-top: var(--s-7);
+  font-size: var(--fs-lg);
+}
+
+.legal p,
+.legal li {
+  color: var(--text-2);
+}
+
+.legal p {
+  margin-top: var(--s-3);
+}
+
+.legal ul {
+  margin-top: var(--s-3);
+  padding-left: 1.25rem;
+}
+
+.legal li + li {
+  margin-top: var(--s-2);
+}
+
+.legal__draft {
+  display: flex;
+  gap: var(--s-3);
+  margin-top: var(--s-5);
+  padding: var(--s-4);
+  border-radius: var(--r-md);
+  background: var(--warning-soft);
+  color: var(--warning);
+  font-size: var(--fs-sm);
+}
+
+.legal__draft .icon {
+  margin-top: 2px;
+}
+
+.legal__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin-bottom: var(--s-5);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.legal__back .icon {
+  transform: rotate(180deg);
+}

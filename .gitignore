@@ -1,0 +1,16 @@
+# Repositório público: versiona SOMENTE os arquivos do site estático.
+# Ficam fora: a API de OCR (server/), o mock (dev/), scripts e documentos internos.
+/*
+!/.gitignore
+!/.nojekyll
+!/index.html
+!/termos.html
+!/privacidade.html
+!/favicon.svg
+!/robots.txt
+!/config.js
+!/styles/
+!/src/
+
+__pycache__/
+*.pyc
